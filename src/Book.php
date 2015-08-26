@@ -39,7 +39,7 @@
 
         function save()
         {
-            $GLOBALS{'DB'}->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}');");
+            $GLOBALS['DB']->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}');");
             $this->id = $GLOBALS ['DB']->lastInsertId();
         }
 //static functions
@@ -48,7 +48,7 @@
         {
             $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
             $books = array();
-                foreach ($returned_books as $book) {
+            foreach ($returned_books as $book) {
                 $title = $book['title'];
                 $id = $book['id'];
                 $new_book = new Book($title, $id);

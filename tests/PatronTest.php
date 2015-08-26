@@ -15,10 +15,10 @@
 
     class PatronTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Patron::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Patron::deleteAll();
+        }
 
         function test_getPatronName()
         {
@@ -31,6 +31,33 @@
 
             //Assert
             $this->assertEquals($patron_name, $result);
+        }
+
+        function test_getPatronId()
+        {
+            $patron_name = "Hannibal";
+            $id = 1;
+            $test_patron = new Patron($patron_name, $id);
+
+            //Act
+            $result = $test_patron->getId();
+
+            //Result
+            $this->assertEquals($id, $result);
+        }
+
+        function test_save()
+        {
+            //arrange
+            $patron_name = "Hannibal";
+            $test_patron = new Patron($patron_name);
+            $test_patron->save();
+
+            //Act
+            $result = Patron::getAll();
+
+            //Assert
+            $this->assertEquals($test_patron, $result[0]);
         }
     }
 
