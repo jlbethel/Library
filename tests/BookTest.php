@@ -83,6 +83,25 @@
             $this->assertEquals([$test_book], $result);
         }
 
+        function test_deleteAll()
+        {
+            //Arrange
+            $title = "Sea Wolf";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "Eye of the World";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            //Act
+            Book::deleteAll();
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
         function test_getAll()
         {
             //Arrange
