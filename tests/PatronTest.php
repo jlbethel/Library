@@ -59,6 +59,24 @@
             //Assert
             $this->assertEquals($test_patron, $result[0]);
         }
+
+        function test_getAll()
+        {
+            //Arrange
+            $patron_name = "Hannibal";
+            $test_patron = new Patron($patron_name);
+            $test_patron->save();
+
+            $patron_name2 = "Johnny";
+            $test_patron2 = new Patron($patron_name2);
+            $test_patron2->save();
+
+            //Act
+            $result = Patron::getAll();
+
+            //Assert
+            $this->assertEquals($test_patron, $result[0]);
+        }
     }
 
 

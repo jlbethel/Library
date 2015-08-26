@@ -95,7 +95,7 @@
             $test_book2->save();
 
             //Act
-            $result = Book::getALl();
+            $result = Book::getAll();
 
             //Assert
             $this->assertEquals($test_book, $result[0]);
@@ -151,7 +151,7 @@
             //Act
             $result = [$test_author];
             $test_book->addAuthor($test_author);
-            
+
             //Assert
             $this->assertEquals($test_book->getAuthors(), $result);
         }
