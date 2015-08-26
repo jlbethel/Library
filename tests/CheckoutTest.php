@@ -48,5 +48,61 @@
             //Assert
             $this->assertEquals($test_checkout, $result[0]);
         }
+
+        function test_getAll()
+        {
+            //Arrange
+            $due_date = "0001-01-01";
+            $test_checkout = new Checkout($due_date);
+            $test_checkout->save();
+
+            $due_date2 = "2020-01-01";
+            $test_checkout2 = new Checkout($due_date2);
+            $test_checkout2->save();
+
+            //Act
+            $result = Checkout::getAll();
+
+            //Assert
+            $this->assertEquals($test_checkout, $result[0]);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $due_date = "0001-01-01";
+            $test_checkout = new Checkout($due_date);
+            $test_checkout->save();
+
+            $due_date2 = "2020-01-01";
+            $test_checkout2 = new Checkout($due_date2);
+            $test_checkout2->save();
+
+            //Act
+            Checkout::deleteAll();
+            $result = Checkout::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $due_date = "0001-01-01";
+            $test_checkout = new Checkout($due_date);
+            $test_checkout->save();
+
+            $due_date2 = "2020-01-01";
+            $test_checkout2 = new Checkout($due_date2);
+            $test_checkout2->save();
+
+            //Act
+            $result = Checkout::find($test_checkout->getId());
+
+            //Assert
+            $this->assertEquals($test_checkout, $result);
+        }
+
     }
 ?>

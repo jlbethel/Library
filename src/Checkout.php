@@ -39,7 +39,7 @@
 
         function getId()
         {
-            return $this->Id();
+            return $this->id;
         }
         //Delete a single Due Date
         function delete()
@@ -72,6 +72,20 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM checkouts;");
         }
+
+        static function find($search_id)
+        {
+            $found_checkout = NULL;
+            $checkouts = Checkout::getAll();
+            foreach ($checkouts as $checkout) {
+                $checkout_id = $checkout->getId();
+                if ($checkout_id == $search_id) {
+                    $found_checkout = $checkout;
+                }
+            }
+            return $found_checkout;
+        }
+
 
 
     }
