@@ -86,6 +86,11 @@
             return $found_checkout;
         }
 
+        //Update method
+        function updateDueDate($new_due_date)
+        {
+            //finish me, also needs a test. Not a great README.md...sorry...
+        }
 
 
     }
