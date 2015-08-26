@@ -34,6 +34,12 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function updatePatronName($new_patron_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE patrons SET patron_name = '{$new_patron_name}' WHERE id = {$this->getId()};");
+            $this->patron_name = $new_patron_name;
+        }
+
         static function getAll()
         {
             $returned_patrons = $GLOBALS['DB']->query("SELECT * FROM patrons;");
@@ -64,6 +70,8 @@
             }
             return $found_patron;
         }
+
+
 
     }
  ?>

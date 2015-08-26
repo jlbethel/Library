@@ -42,6 +42,12 @@
             $GLOBALS['DB']->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}');");
             $this->id = $GLOBALS ['DB']->lastInsertId();
         }
+
+        function updateTitle($new_title)
+        {
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
+            $this->title = $new_title;
+        }
 //static functions
 
         static function getAll()
@@ -75,11 +81,6 @@
             return $found_book;
         }
 
-        function updateTitle($new_title)
-        {
-            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
-            $this->title = $new_title;
-        }
 
         //Add and get Title(s)
         function addAuthor($author)

@@ -114,6 +114,24 @@
             //Assert
             $this->assertEquals($test_patron, $result);
         }
+
+        function test_updatePatronName()
+        {
+            //Arrange
+            $patron_name = "Hannibal";
+            $test_patron = new Patron($patron_name);
+            $test_patron->save();
+
+            $patron_name2 = "Johnny";
+            $test_patron->updatePatronName($patron_name2);
+
+            //Act
+            $id = $test_patron->getId();
+            $result = new Patron($patron_name2, $id);
+
+            //Assert
+            $this->assertEquals(Patron::find($id), $result);
+        }
     }
 
 
