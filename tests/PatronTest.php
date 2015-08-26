@@ -96,6 +96,24 @@
             //Assert
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $patron_name = "Hannibal";
+            $test_patron = new Patron($patron_name);
+            $test_patron->save();
+
+            $patron_name2 = "Johnny";
+            $test_patron2 = new Patron($patron_name2);
+            $test_patron2->save();
+
+            //Act
+            $result = Patron::find($test_patron->getId());
+
+            //Assert
+            $this->assertEquals($test_patron, $result);
+        }
     }
 
 

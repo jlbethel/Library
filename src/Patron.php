@@ -52,5 +52,18 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons");
         }
 
+        static function find($search_id)
+        {
+            $found_patron = NULL;
+            $patrons = Patron::getAll();
+            foreach ($patrons as $patron) {
+                $patron_id = $patron->getId();
+                if ($patron_id == $search_id) {
+                    $found_patron = $patron;
+                }
+            }
+            return $found_patron;
+        }
+
     }
  ?>
