@@ -2,15 +2,13 @@
     class Book
     {
         private $title;
-        private $due_date;
         private $id;
 
 //construct function
 
-        function __construct($title, $due_date, $id = NULL)
+        function __construct($title,  $id = NULL)
         {
             $this->title = $title;
-            $this->due_date = $due_date;
             $this->id = $id;
         }
 
@@ -21,21 +19,11 @@
             $this->title = $new_title;
         }
 
-        function setDueDate($new_due_date)
-        {
-            $this->due_date = $new_due_date;
-        }
-
 //Get functions:
 
         function getTitle()
         {
             return $this->title;
-        }
-
-        function getDueDate()
-        {
-            return $this->due_date;
         }
 
         function getId()
@@ -51,7 +39,7 @@
 
         function save()
         {
-            $GLOBALS{'DB'}->exec("INSERT INTO books (title, due_date) VALUES ('{$this->getTitle()}', '{$this->getDueDate()}');");
+            $GLOBALS{'DB'}->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}');");
             $this->id = $GLOBALS ['DB']->lastInsertId();
         }
 //static functions
@@ -62,9 +50,8 @@
             $books = array();
                 foreach ($returned_books as $book) {
                 $title = $book['title'];
-                $due_date = $book['due_date'];
                 $id = $book['id'];
-                $new_book = new Book($title, $due_date, $id);
+                $new_book = new Book($title, $id);
                 array_push($books, $new_book);
             }
             return $books;

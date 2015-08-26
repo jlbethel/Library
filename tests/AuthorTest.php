@@ -153,6 +153,45 @@
             $this->assertEquals(Author::find($id), $result);
         }
 
+        function test_addBook()
+        {
+            //Arrange
+            $author_name = "Jack London";
+            $test_author = new Author($author_name);
+            $test_author->save();
+
+            $title = "Sea Wolf";
+            $test_book = new Book($title);
+            $test_book->save();
+
+
+            //Act
+            $result = [$test_book];
+            $test_author->addBook($test_book);
+
+            //Assert
+            $this->assertEquals($test_author->getBooks(), $result);
+        }
+
+        function test_addBooks()
+        {
+            //Arrange
+            $author_name = "Jack London";
+            $test_author = new Author($author_name);
+            $test_author->save();
+
+            $title = "Sea Wolf";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $result = [$test_author];
+            $test_book->addAuthor($test_book);
+
+            //Assert
+            $this->assertEquals($test_bool->getBooks(), $result);
+        }
+
 
     }
 

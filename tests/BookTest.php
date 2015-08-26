@@ -25,8 +25,7 @@
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
+            $test_book = new Book($title);
 
             //Act
             $result = $test_book->getTitle();
@@ -35,27 +34,13 @@
             $this->assertEquals($title, $result);
         }
 
-        function test_getDueDate()
-        {
-            //Arrange
-            $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
-
-            //Act
-            $result = $test_book->getDueDate();
-
-            //Assert
-            $this->assertEquals($due_date, $result);
-        }
 
         function test_getId()
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
             $id = 1;
-            $test_book = new Book($title, $due_date, $id);
+            $test_book = new Book($title, $id);
 
             //Act
             $result = $test_book->getId();
@@ -69,8 +54,7 @@
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
+            $test_book = new Book($title);
             $test_book->save();
 
             //Act
@@ -84,13 +68,11 @@
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
+            $test_book = new Book($title);
             $test_book->save();
 
             $title2 = "Eye of the World";
-            $due_date2 = "2015-10-10";
-            $test_book2 = new Book($title2, $due_date2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
@@ -105,13 +87,11 @@
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
+            $test_book = new Book($title);
             $test_book->save();
 
             $title2 = "Eye of the World";
-            $due_date2 = "2015-10-10";
-            $test_book2 = new Book($title2, $due_date2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
@@ -125,21 +105,39 @@
         {
             //Arrange
             $title = "Sea Wolf";
-            $due_date = "2015-09-09";
-            $test_book = new Book($title, $due_date);
+            $test_book = new Book($title);
             $test_book->save();
 
             $title2 = "Eye of the World";
-            $due_date2 = "2015-10-10";
-            $test_book2 = new Book($title2, $due_date2);
+            $test_book2 = new Book($title2);
             $test_book2->save();
 
             //Act
             $result = Book::find($test_book->getId());
 
             //Assert
-            $this->assertEquals($test_book, $result);    
+            $this->assertEquals($test_book, $result);
         }
+
+        function test_updateTitle()
+        {
+            //Arrange
+            $title = "Sea Wolf";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "Eye of the World";
+            $test_book->updateTitle($title2);
+
+            //Act
+            $id = $test_book->getId();
+            $result = new Book($title2, $id);
+
+            //Assert
+            $this->assertEquals(Book::find($id), $result);
+        }
+
+        
     }
 
 
