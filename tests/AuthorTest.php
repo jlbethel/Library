@@ -173,7 +173,7 @@
             $this->assertEquals($test_author->getBooks(), $result);
         }
 
-        function test_addBooks()
+        function test_getBooks()
         {
             //Arrange
             $author_name = "Jack London";
@@ -186,10 +186,10 @@
 
             //Act
             $result = [$test_author];
-            $test_book->addAuthor($test_book);
+            $test_book->addAuthor($test_author);
 
             //Assert
-            $this->assertEquals($test_bool->getBooks(), $result);
+            $this->assertEquals($test_book->getAuthors(), $result);
         }
 
 
