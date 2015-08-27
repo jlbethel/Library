@@ -175,6 +175,19 @@
             $this->assertEquals($test_book->getAuthors(), $result);
         }
 
+        function test_addCopy()
+        {
+          $name = "Big Lebowski";
+          $test_book = new Book($name);
+          $test_book->save();
+
+          $test_book->addCopy();
+          $test_book->addCopy();
+          $result = $test_book->getCopies();
+
+          $this->assertEquals(2, count($result));
+        }
+
 
     }
 
