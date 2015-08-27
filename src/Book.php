@@ -109,5 +109,24 @@
 
         }
 
+        function addCopy()
+        {
+          $GLOBALS['DB']->exec("INSERT INTO copies(book_id) VALUES ({$this->getId()});");
+        }
+
+        function getCopies()
+        {
+            $returned_copies = $GLOBALS['DB']->query("SELECT copies.* FROM books
+                JOIN copies ON (copies.book_id = books.id)
+                WHERE copies.book_id = {$this->getId()};");
+
+            $copies = array();
+            foreach($returned_copies as $copy) {
+                $id = $copy['id'];
+                array_push($copies, $id);
+            }
+            return $copies;
+        }
+
     }
 ?>

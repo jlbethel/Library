@@ -7,6 +7,7 @@
 
     require_once "src/Patron.php";
     require_once "src/Book.php";
+    require_once "src/Checkout.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -131,6 +132,24 @@
 
             //Assert
             $this->assertEquals(Patron::find($id), $result);
+        }
+
+        function test_addCheckout()
+        {
+          $name = "Big Lebowski";
+          $test_book = new Book($name);
+          $test_book->save();
+          $test_book->addCopy();
+          $copies = $test_book->getCopies();
+
+          $patron_name = "Big Lebowski";
+          $test_patron = new Patron($patron_name);
+          $test_patron->save();
+          $test_patron->addCheckout($copies[0]);
+
+          $result = $test_patron->getCheckouts();
+
+          $this->assertEquals(1, count($result));
         }
     }
 

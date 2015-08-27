@@ -71,7 +71,28 @@
             return $found_patron;
         }
 
+        function addCheckout($copy_id)
+        {
+            $date = date("Y-m-d", strtotime("+1 month"));
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (patron_id, copy_id, due_date)
+                VALUES ({$this->id}, {$copy_id}, '{$date}');");
+        }
 
-
+        function getCheckouts()
+        {
+            $returned_checkouts = $GLOBALS['DB']->query("SELECT * FROM checkouts
+                WHERE patron_id = {$this->getId()};");
+            $checkouts = array();
+            foreach($returned_checkouts as $checkout)
+            {
+                $patron_id = $checkout['patron_id'];
+                $id = $checkout['id'];
+                $copy_id = $checkout['copy_id'];
+                $due_date = $checkout['due_date'];
+                $new_checkout = new Checkout($due_date, $patron_id, $copy_id, $id);
+                array_push($checkouts, $new_checkout);
+            }
+            return $checkouts;
+        }
     }
  ?>
