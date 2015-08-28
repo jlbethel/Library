@@ -49,7 +49,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO Checkouts (due_date) VALUES ('{$this->getDueDate()}');");
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (due_date) VALUES ('{$this->getDueDate()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
